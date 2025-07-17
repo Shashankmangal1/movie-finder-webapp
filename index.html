@@ -2,20 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Movie Finder</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="container">
-    <h1>🎬 Movie Finder</h1>
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Enter movie title..." />
-      <button onclick="searchMovie()">Search</button>
-    </div>
-    <div class="loader" id="loader"></div>
-    <div id="movieResult" class="movie-card hidden"></div>
+  <div class="overlay">
+    <header class="navbar">
+      <div class="logo">
+        <img src="Assets/logo.png" alt="Logo" />
+        <span>MovieFinder</span>
+      </div>
+      <nav class="nav-links" id="navLinks">
+        <a href="#" onclick="goHome()">Home</a>
+        <a href="#" onclick="showTop5Movies()">Top 5 Movies</a>
+        <a href="#" onclick="showTop10Movies()">Top 10 Movies</a>
+      </nav>
+      <button class="toggle" id="toggleBtn">☰</button>
+    </header>
+
+    <main class="main-container">
+      <h1>🍿 Movie Finder</h1>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Enter movie title..." />
+        <button onclick="searchMovie()">Search</button>
+      </div>
+      <div id="loader" class="loader hidden">Loading...</div>
+      <div id="movieResult" class="movie-result hidden"></div>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 MovieFinder. All rights reserved.</p>
+    </footer>
   </div>
 
   <script src="script.js"></script>

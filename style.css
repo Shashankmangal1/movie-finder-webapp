@@ -1,73 +1,190 @@
-/* style.css */
-
-body {
+/* Reset & Base */
+* {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: url('./Assets/image.avif') no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  min-height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
-
-/* Optional: overlay for better contrast */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+html, body {
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* dark overlay */
-  z-index: -1;
 }
-
-/* Center the content */
-.container {
+.overlay {
+  background-image: url('Assets/image.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: brightness(0.5);
+  min-height: 100vh;
+  color: white;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
 }
 
-/* Movie Finder Heading */
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem 2rem;
+  color: white;
+}
+.logo {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-
-/* Input and Button */
-input {
-  padding: 0.5rem 1rem;
-  width: 300px;
-  border-radius: 5px 0 0 5px;
+.logo img {
+  width: 40px;
+  height: 40px;
+}
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.nav-links a:hover {
+  color: violet;
+}
+.toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
   border: none;
-  font-size: 1rem;
+  color: white;
 }
 
-button {
-  padding: 0.5rem 1.5rem;
-  background-color: #7e22ce;
+/* Main */
+.main-container {
+  text-align: center;
+  margin-top: 5rem;
+  padding: 1rem;
+  flex: 1;
+}
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.search-bar {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.search-bar input {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  width: 250px;
+}
+.search-bar button {
+  padding: 0.5rem 1rem;
+  background-color: blueviolet;
   color: white;
   border: none;
-  border-radius: 0 5px 5px 0;
-  font-size: 1rem;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+}
+.loader {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+.hidden {
+  display: none;
 }
 
-button:hover {
-  background-color: #5b0aa8;
-}
-
-/* Movie Results */
-#movie-container {
-  margin-top: 2rem;
+/* Movie Result - Single */
+.movie-result {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   gap: 2rem;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  margin: 1rem auto;
+  max-width: 800px;
+  align-items: center;
+  text-align: left;
+}
+.movie-result img {
+  width: 200px;
+  border-radius: 5px;
+}
+.movie-result h2 {
+  margin-bottom: 1rem;
+}
+
+/* Movie Grid for Top Movies */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.movie-card {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.movie-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+.movie-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+.movie-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
+footer {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  text-align: center;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+  .nav-links.show {
+    display: flex;
+  }
+  .toggle {
+    display: block;
+  }
+  .movie-result {
+    flex-direction: column;
+    align-items: center;
+  }
+  .movie-result img {
+    width: 100%;
+    max-width: 300px;
+  }
 }
