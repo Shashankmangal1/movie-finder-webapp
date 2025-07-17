@@ -1,37 +1,50 @@
-const apiKey = 'http://www.omdbapi.com/?i=tt3896198&apikey=ae7ed9e9'; 
+const API_KEY = "ae7ed9e9"; // Your OMDb API key
 
-function searchMovies() {
-  const searchInput = document.getElementById("searchInput").value.trim();
-  const moviesList = document.getElementById("moviesList");
+function searchMovie() {
+  const query = document.getElementById("searchInput").value;
+  const loader = document.getElementById("loader");
+  const result = document.getElementById("movieResult");
+  const overlay = document.querySelector(".overlay");
 
-  if (!searchInput) {
-    alert("Please enter a movie title!");
-    return;
-  }
+  if (!query) return;
 
-  fetch(`https://www.omdbapi.com/?apikey=${apiKey}&s=${searchInput}`)
-    .then(response => response.json())
-    .then(data => {
-      moviesList.innerHTML = "";
+  loader.style.display = "block";
+  result.classList.add("hidden");
 
-      if (data.Response === "True") {
-        data.Search.forEach(movie => {
-          const movieCard = document.createElement("div");
-          movieCard.classList.add("movie-card");
-          movieCard.innerHTML = `
-            <img src="${movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/200x300"}" alt="${movie.Title}">
-            <h3>${movie.Title}</h3>
-            <p>${movie.Year}</p>
-          `;
-          moviesList.appendChild(movieCard);
-        });
+  fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(query)}&apikey=${API_KEY}`)
+    .then((res) => res.json())
+    .then((data) => {
+      loader.style.display = "none";
+
+      if (data.Response === "False") {
+        result.innerHTML = `<p>❌ Movie not found.</p>`;
+        result.classList.remove("hidden");
+        overlay.style.backgroundImage = "";
+        return;
+      }
+
+      result.innerHTML = `
+        <img src="${data.Poster !== "N/A" ? data.Poster : "assets/fallback.jpg"}" alt="Poster" />
+        <div>
+          <h2>${data.Title} (${data.Year})</h2>
+          <p><strong>Genre:</strong> ${data.Genre}</p>
+          <p><strong>IMDb Rating:</strong> ${data.imdbRating}</p>
+          <p><strong>Plot:</strong> ${data.Plot}</p>
+        </div>
+      `;
+      result.classList.remove("hidden");
+
+      if (data.Poster !== "N/A") {
+        overlay.style.backgroundImage = `url('${data.Poster}')`;
+        overlay.style.backgroundSize = "cover";
+        overlay.style.backgroundPosition = "center";
       } else {
-        moviesList.innerHTML = `<p>No movies found. Try a different keyword.</p>`;
+        overlay.style.backgroundImage = "";
       }
     })
-    .catch(error => {
-      console.error("Error fetching movies:", error);
-      moviesList.innerHTML = `<p>Something went wrong. Please try again later.</p>`;
+    .catch((err) => {
+      loader.style.display = "none";
+      result.innerHTML = `<p>⚠️ Error fetching movie data.</p>`;
+      result.classList.remove("hidden");
     });
 }
-
