@@ -19,7 +19,7 @@ A responsive web app that lets users search for movies by title and view their d
 - HTML5
 - CSS3
 - JavaScript (ES6)
-- [OMDb API](https://www.omdbapi.com/)
+- [OMDb API](http://www.omdbapi.com/?i=tt3896198&apikey=ae7ed9e9 )
 
 ---
 
