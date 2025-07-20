@@ -3,13 +3,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
-html, body {
+html,
+body {
   height: 100%;
 }
 .overlay {
-  background-image: url('Assets/image.avif');
+  background-image: url("Assets/image.avif");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -117,16 +118,33 @@ h1 {
 .movie-result h2 {
   margin-bottom: 1rem;
 }
+#movieResult {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers title and grid */
+  padding: 1rem 0;
+  box-sizing: border-box;
+}
+
 
 /* Movie Grid for Top Movies */
+.grid-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
   padding: 2rem;
+  width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  box-sizing: border-box;
 }
+
 .movie-card {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 10px;
@@ -135,21 +153,32 @@ h1 {
   flex-direction: column;
   color: white;
   padding: 1rem;
+  box-sizing: border-box;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .movie-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  transform: scale(1.03);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
 }
+
 .movie-card img {
   width: 100%;
-  height: auto;
+  height: 350px;
+  object-fit: cover;
   border-radius: 6px;
   margin-bottom: 1rem;
 }
+
 .movie-card h3 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
+  word-wrap: break-word;
+}
+
+.movie-card p {
+  font-size: 0.85rem;
+  line-height: 1.2;
 }
 
 /* Footer */

@@ -34,12 +34,14 @@ function searchMovie() {
       }
 
       movieResult.innerHTML = `
-        <img src="${data.Poster !== "N/A" ? data.Poster : "assets/fallback.jpg"}" alt="Poster" />
-        <div>
-          <h2>${data.Title} (${data.Year})</h2>
-          <p><strong>Genre:</strong> ${data.Genre}</p>
-          <p><strong>IMDb Rating:</strong> ${data.imdbRating}</p>
-          <p><strong>Plot:</strong> ${data.Plot}</p>
+        <div class="movie-result">
+          <img src="${data.Poster !== "N/A" ? data.Poster : "assets/fallback.jpg"}" alt="Poster" />
+          <div>
+            <h2>${data.Title} (${data.Year})</h2>
+            <p><strong>Genre:</strong> ${data.Genre}</p>
+            <p><strong>IMDb Rating:</strong> ${data.imdbRating}</p>
+            <p><strong>Plot:</strong> ${data.Plot}</p>
+          </div>
         </div>
       `;
       movieResult.classList.remove("hidden");
@@ -78,6 +80,31 @@ function showTop5Movies() {
   fetchAndDisplayTopMovies(ids, "Top 5 Movies ⭐");
 }
 
+// Bollywood Movies
+function showBollywoodMovies() {
+  const bollywoodIDs = [
+    "tt0110076", // Hum Aapke Hain Koun..!
+    "tt0106333", // Baazigar
+    "tt0456144", // Om Shanti Om
+    "tt0367110", // Swades
+    "tt7286456", // Gully Boy
+  ];
+  fetchAndDisplayTopMovies(bollywoodIDs, "Top Bollywood Picks 🎥");
+}
+
+// Hollywood Movies
+function showHollywoodMovies() {
+  const hollywoodIDs = [
+    "tt0133093", // The Matrix
+    "tt1375666", // Inception
+    "tt0120737", // The Lord of the Rings: The Fellowship of the Ring
+    "tt0110912", // Pulp Fiction
+    "tt0109830", // Forrest Gump
+  ];
+  fetchAndDisplayTopMovies(hollywoodIDs, "Top Hollywood Picks 🌎");
+}
+
+
 // Reusable Fetch Function
 function fetchAndDisplayTopMovies(ids, titleText) {
   loader.style.display = "block";
@@ -91,7 +118,8 @@ function fetchAndDisplayTopMovies(ids, titleText) {
     .then(movies => {
       loader.style.display = "none";
       overlay.style.backgroundImage = "";
-      movieResult.innerHTML = `<h2>${titleText}</h2>
+      movieResult.innerHTML = `
+        <h2>${titleText}</h2>
         <div class="movie-grid">
           ${movies.map(movie => `
             <div class="movie-card">
